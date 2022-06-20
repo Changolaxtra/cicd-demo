@@ -6,7 +6,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                  git 'https://github.com/Changolaxtra/cicd-demo'
-                 sh mvn clean install
+                 sh 'mvn clean install'
             }
         }
         stage('Deploy') {
