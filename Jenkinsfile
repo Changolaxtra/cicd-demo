@@ -9,12 +9,13 @@ pipeline {
             jdk 'jdk'
     }
     stages {
-     stage ('Initialize') {
-                steps {
+        stage ('Initialize') {
+            steps {
                     sh '''
                         echo "JAVA_HOME = ${JAVA_HOME}"
                         echo "M2_HOME = ${M2_HOME}"
                     '''
+            }
         }
         stage('Build & Test') {
             steps {
