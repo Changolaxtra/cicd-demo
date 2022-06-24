@@ -18,7 +18,7 @@ pipeline {
             }
         }
         stage('Build & Test') {
-            withEnv(["JAVA_HOME=/opt/java/openjdk"]){}
+            withEnv(["JAVA_HOME=/opt/java/openjdk"]){
                 steps {
                  git 'https://github.com/Changolaxtra/cicd-demo'
                  sh 'mvn clean install'
