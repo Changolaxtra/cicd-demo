@@ -9,19 +9,13 @@ pipeline {
             jdk 'jdk'
     }
     stages {
-        stage ('Initialize') {
-            steps {
-                    sh '''
-                        echo "JAVA_HOME = ${JAVA_HOME}"
-                        echo "M2_HOME = ${M2_HOME}"
-                    '''
-            }
-        }
         stage('Build & Test') {
-            withEnv(["JAVA_HOME=/opt/java/openjdk"]){
-                steps {
-                 git 'https://github.com/Changolaxtra/cicd-demo'
-                 sh 'mvn clean install'
+            steps {
+                withEnv(["JAVA_HOME=/opt/java/openjdk"]){
+                    sh 'echo "JAVA_HOME = ${JAVA_HOME}"'
+                    sh 'echo "M2_HOME = ${M2_HOME}"'
+                    git 'https://github.com/Changolaxtra/cicd-demo'
+                    sh 'mvn clean install'
                 }
             }
         }
