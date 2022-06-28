@@ -7,7 +7,6 @@ pipeline {
     tools {
             maven 'maven3'
             jdk 'jdk'
-            dockerTool 'docker'
     }
     stages {
         stage('Build & Test') {
@@ -31,7 +30,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry( '', registryCredential ) {
-                        dockerImage.push('latest')
+                        dockerImage.push(env.BUILD_ID)
                     }
                 }
             }
