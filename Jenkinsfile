@@ -20,10 +20,19 @@ pipeline {
                 }
             }
         }
-        stage('Docker build & push') {
+        stage('Docker Build') {
             steps {
-                docker.withRegistry('https://hub.docker.com/', 'dockerHub') {
-                  docker.build('danrojas/spring-example').push('latest')
+                script {
+                    dockerImage = docker.build 'danrojas/spring-example'
+                }
+            }
+        }
+        stage('Docker Push'){
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push('latest')
+                    }
                 }
             }
         }
