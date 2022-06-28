@@ -23,7 +23,7 @@ pipeline {
         stage('Docker Build'){
             steps{
                 script {
-                    dockerImage = docker.build("spring-example")
+                    dockerImage = docker.build("darojas/spring-example")
                     dockerImage.tag("${env.BUILD_ID}")
                 }
             }
@@ -33,7 +33,8 @@ pipeline {
                 sh 'docker logout'
                 script {
                     docker.withRegistry('https://docker.io', 'dockerId') {
-                        dockerImage.push()
+                        dockerImage.push("darojas/spring-example:${env.BUILD_ID}")
+                        dockerImage.push("darojas/spring-example:latest")
                     }
                 }
             }
