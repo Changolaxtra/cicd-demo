@@ -23,7 +23,8 @@ pipeline {
         stage('Docker Build'){
             steps{
                 script {
-                    dockerImage = docker.build("darojas/spring-example:${env.BUILD_ID}")
+                    dockerImage = docker.build("spring-example")
+                    dockerImage.tag("darojas/spring-example:${env.BUILD_ID}")
                 }
             }
         }
