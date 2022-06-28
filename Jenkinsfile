@@ -33,8 +33,8 @@ pipeline {
                 sh 'docker logout'
                 script {
                     docker.withRegistry('https://docker.io', 'dockerId') {
-                        dockerImage.push("darojas/spring-example:${env.BUILD_ID}")
-                        dockerImage.push("darojas/spring-example:latest")
+                        dockerImage.push("${env.BUILD_ID}")
+                        dockerImage.push("latest")
                     }
                 }
             }
