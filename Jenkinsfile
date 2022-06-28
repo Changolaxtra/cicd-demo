@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'aws eks get-token'
+                sh 'aws eks get-token --cluster-name test-cluster'
                 sh 'kubectl apply -f deployment.yml'
             }
         }
