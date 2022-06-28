@@ -29,7 +29,7 @@ pipeline {
         stage('Docker Push'){
             steps {
                 script {
-                    docker.withRegistry( '', registryCredential ) {
+                    docker.withRegistry('https://hub.docker.com/', 'dockerId') {
                         dockerImage.push(env.BUILD_ID)
                     }
                 }
