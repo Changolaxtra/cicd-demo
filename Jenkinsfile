@@ -22,8 +22,9 @@ pipeline {
         }
         stage('Docker Build & Push'){
             steps {
+                sh 'docker -v'
                 script {
-                    docker.withRegistry('https://index.docker.io', dockerId) {
+                    docker.withRegistry('https://index.docker.io', 'dockerId') {
                         dockerImage = docker.build 'darojas/spring-example'
                         dockerImage.push(env.BUILD_ID)
                     }
