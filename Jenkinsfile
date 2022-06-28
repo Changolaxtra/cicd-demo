@@ -32,7 +32,7 @@ pipeline {
             steps {
                 sh 'docker logout'
                 script {
-                    docker.withRegistry('https://docker.io', 'dockerId') {
+                    docker.withRegistry('', 'dockerId') {
                         dockerImage.push("${env.BUILD_ID}")
                         dockerImage.push("latest")
                     }
