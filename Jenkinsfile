@@ -41,6 +41,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
+                sh 'aws eks get-token'
                 sh 'kubectl apply -f deployment.yml'
             }
         }
