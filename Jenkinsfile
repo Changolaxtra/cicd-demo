@@ -20,12 +20,17 @@ pipeline {
                 }
             }
         }
-        stage('Docker Build & Push'){
+        stage('Docker Build'){
+            steps{
+                script {
+                    dockerImage = docker.build("darojas/spring-example:${env.BUILD_ID}")
+                }
+            }
+        }
+        stage('Docker Push'){
             steps {
-                sh 'docker -v'
                 script {
                     docker.withRegistry('https://docker.io', 'dockerId') {
-                        dockerImage = docker.build("darojas/spring-example:${env.BUILD_ID}")
                         dockerImage.push()
                     }
                 }
