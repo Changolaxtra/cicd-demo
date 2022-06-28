@@ -7,6 +7,7 @@ pipeline {
     tools {
             maven 'maven3'
             jdk 'jdk'
+            docker 'docker'
     }
     stages {
         stage('Build & Test') {
@@ -21,18 +22,14 @@ pipeline {
         }
         stage('Docker build') {
             steps {
-                sh 'curl -sSL -O https://download.docker.com/linux/static/stable/x86_64/docker-20.10.9.tgz'
-                sh 'rm -Rf tmp && mkdir tmp && tar zxf docker-20.10.9.tgz -C tmp'
-                sh 'ls -la tmp && ls -la tmp/docker'
-                sh 'mv ./tmp/docker/docker ./docker && chmod +x ./docker'
-                sh './docker build -t danrojas/spring-example:latest .'
+                sh 'docker build -t danrojas/spring-example:latest .'
             }
         }
          stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "./docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh './docker push danrojas/spring-example:latest'
+                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh 'docker push danrojas/spring-example:latest'
                 }
             }
          }
