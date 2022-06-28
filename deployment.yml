@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spring-example-jenkins 
+  name: spring-example
   labels:
     app: spring-example
 spec:
@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: spring-example
-          image: docker.io/darojas/spring-example:talest
+          image: docker.io/darojas/spring-example:latest
           ports:
             - containerPort: 8081
               protocol: TCP
