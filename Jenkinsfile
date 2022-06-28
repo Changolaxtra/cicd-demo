@@ -22,7 +22,8 @@ pipeline {
         stage('Docker build') {
             steps {
                 sh 'curl -sSL -O https://download.docker.com/linux/static/stable/x86_64/docker-20.10.9.tgz'
-                sh 'tar zxf docker-20.10.9.tgz && mv ./docker/docker /usr/local/bin && chmod +x /usr/local/bin/docker'
+                sh 'tar zxf docker-20.10.9.tgz'
+                sh 'mv ./docker/docker ./ && chmod +x ./docker && ls -la'
                 sh 'docker build -t danrojas/spring-example:latest .'
             }
         }
