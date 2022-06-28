@@ -22,7 +22,7 @@ pipeline {
         stage('Docker Build') {
             steps {
                 script {
-                    dockerImage = docker.build 'danrojas/spring-example'
+                    dockerImage = docker.build 'darojas/spring-example'
                 }
             }
         }
