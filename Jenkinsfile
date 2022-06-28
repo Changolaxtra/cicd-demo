@@ -25,9 +25,8 @@ pipeline {
                 sh 'docker -v'
                 script {
                     docker.withRegistry('https://docker.io', 'dockerId') {
-                        dockerImage = docker.build 'darojas/spring-example'
-                        dockerImage.tag(env.BUILD_ID)
-                        dockerImage.push(env.BUILD_ID)
+                        dockerImage = docker.build("darojas/spring-example:${env.BUILD_ID}")
+                        dockerImage.push()
                     }
                 }
             }
