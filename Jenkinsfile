@@ -7,7 +7,7 @@ pipeline {
     tools {
             maven 'maven3'
             jdk 'jdk'
-            docker 'docker'
+            dockerTool 'docker'
     }
     stages {
         stage('Build & Test') {
