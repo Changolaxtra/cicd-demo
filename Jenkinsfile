@@ -29,7 +29,7 @@ pipeline {
         stage('Docker Push'){
             steps {
                 script {
-                    docker.withRegistry('darojas/test-repo', 'dockerId') {
+                    docker.withRegistry('https://index.docker.io', 'dockerId') {
                         dockerImage.push(env.BUILD_ID)
                     }
                 }
