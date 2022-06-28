@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-example-jenkins 
+  labels:
+    app: spring-example
+spec:
+  selector:
+    matchLabels:
+        app: spring-example
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: spring-example
+    spec:
+      containers:
+        - name: spring-example
+          image: docker.io/darojas/spring-example:talest
+          ports:
+            - containerPort: 8081
+              protocol: TCP
+          imagePullPolicy: Always
