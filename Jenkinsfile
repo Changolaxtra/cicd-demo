@@ -29,6 +29,7 @@ pipeline {
         }
         stage('Docker Push'){
             steps {
+                sh 'docker logout'
                 script {
                     docker.withRegistry('https://docker.io', 'dockerId') {
                         dockerImage.push()
