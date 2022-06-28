@@ -25,14 +25,14 @@ pipeline {
                 sh 'mkdir tmp && tar zxf docker-20.10.9.tgz -C tmp'
                 sh 'ls -la tmp && ls -la tmp/docker'
                 sh 'mv ./tmp/docker/docker ./docker && chmod +x ./docker'
-                sh 'docker build -t danrojas/spring-example:latest .'
+                sh './docker build -t danrojas/spring-example:latest .'
             }
         }
          stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh 'docker push danrojas/spring-example:latest'
+                    sh "./docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+                    sh './docker push danrojas/spring-example:latest'
                 }
             }
          }
