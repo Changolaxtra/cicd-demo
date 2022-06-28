@@ -3,6 +3,7 @@ pipeline {
     agent any
     environment {
             JAVA_HOME = '/opt/java/openjdk'
+            registry = "darojas/spring-example"
     }
     tools {
             maven 'maven3'
@@ -22,7 +23,7 @@ pipeline {
         stage('Docker Build & Push'){
             steps {
                 script {
-                    docker.withRegistry('https://index.docker.io', 'dockerId') {
+                    docker.withRegistry('https://index.docker.io', dockerId) {
                         dockerImage = docker.build 'darojas/spring-example'
                         dockerImage.push(env.BUILD_ID)
                     }
