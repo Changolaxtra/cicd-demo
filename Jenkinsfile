@@ -20,18 +20,12 @@ pipeline {
                 }
             }
         }
-        stage('Docker build') {
+        stage('Docker build & push') {
             steps {
-                sh 'docker build -t danrojas/spring-example:latest .'
-            }
-        }
-         stage('Docker Push') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-                    sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-                    sh 'docker push danrojas/spring-example:latest'
+                docker.withRegistry('https://hub.docker.com/', 'dockerHub') {
+                  docker.build('danrojas/spring-example').push('latest')
                 }
             }
-         }
+        }
     }
 }
