@@ -42,12 +42,12 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'cd deployment && ls -la'
                 sh 'aws sts get-caller-identity'
                 sh 'aws eks update-kubeconfig --name test-cluster --region us-west-2'
                 sh 'aws eks get-token --cluster-name test-cluster'
                 sh 'kubectl config view --minify'
-                sh 'kubectl apply -f deployment.yml'
+                sh 'ls -la'
+                sh 'kubectl apply -f k8s-deployment.yml'
             }
         }
     }
