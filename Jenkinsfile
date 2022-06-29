@@ -8,6 +8,7 @@ pipeline {
     tools {
             maven 'maven3'
             jdk 'jdk'
+            git 'default'
     }
     stages {
         stage('Build & Test') {
@@ -15,7 +16,7 @@ pipeline {
                 withEnv(["JAVA_HOME=/opt/java/openjdk"]){
                     sh 'echo "JAVA_HOME = ${JAVA_HOME}"'
                     sh 'echo "M2_HOME = ${M2_HOME}"'
-                    git 'https://github.com/Changolaxtra/cicd-demo'
+                    sh 'git clone https://github.com/Changolaxtra/cicd-demo && cd cicd-demo'
                     sh 'ls -la'
                     sh 'mvn clean install'
                 }
@@ -47,7 +48,7 @@ pipeline {
                 sh 'aws eks get-token --cluster-name test-cluster'
                 sh 'kubectl config view --minify'
                 sh 'ls -la'
-                sh 'kubectl apply -f k8s-deployment.yml'
+                sh 'kubectl apply -f deployment.yml'
             }
         }
     }
