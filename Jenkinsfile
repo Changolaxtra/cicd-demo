@@ -16,6 +16,7 @@ pipeline {
                     sh 'echo "JAVA_HOME = ${JAVA_HOME}"'
                     sh 'echo "M2_HOME = ${M2_HOME}"'
                     git 'https://github.com/Changolaxtra/cicd-demo'
+                    sh 'ls -la'
                     sh 'mvn clean install'
                 }
             }
