@@ -1,14 +1,13 @@
-apiVersion:apps/v1
+apiVersion: apps/v1
 kind: Deployment
+
 metadata:
   name: spring-example
-  labels:
-    app: spring-example
 spec:
+  replicas: 2
   selector:
     matchLabels:
-        app: spring-example
-  replicas: 3
+      app: spring-example
   strategy:
     type: RollingUpdate
   template:
