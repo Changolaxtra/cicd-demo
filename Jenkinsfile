@@ -16,7 +16,7 @@ pipeline {
                 withEnv(["JAVA_HOME=/opt/java/openjdk"]){
                     sh 'echo "JAVA_HOME = ${JAVA_HOME}"'
                     sh 'echo "M2_HOME = ${M2_HOME}"'
-                    sh 'git clone https://github.com/Changolaxtra/cicd-demo && cd cicd-demo'
+                    sh 'rm -Rf cicd-demo && git clone https://github.com/Changolaxtra/cicd-demo && cd cicd-demo'
                     sh 'ls -la'
                     sh 'mvn clean install'
                 }
