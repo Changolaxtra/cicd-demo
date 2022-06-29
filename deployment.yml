@@ -9,7 +9,7 @@ spec:
     matchLabels:
       app: spring-example
   strategy:
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       labels:
