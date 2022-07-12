@@ -1,0 +1,21 @@
+cat /var/jenkins_home/secrets/initialAdminPassword
+
+apt-get update && apt-get install docker.io -y
+chmod 666 /var/run/docker.sock
+
+apt install awscli
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv /tmp/eksctl /usr/local/bin
+mv /tmp/eksctl /usr/local/bin
+eksctl version
+
+apt-get install -y apt-transport-https ca-certificates curl
+
+apt-get install nano
+nano cluster-trust-policy.json
+aws iam create-role   --role-name eksClusterRole   --assume-role-policy-document file://"cluster-trust-policy.json"
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+mv ./kubectl /usr/local/bin/kubectl
+kubectl version
